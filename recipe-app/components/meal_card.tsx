@@ -14,9 +14,11 @@ export default function MealCard({ meal }: MealCardProps) {
                 alt={meal.strMeal}
                 className="w-full h-100 object-cover"
             />
-            <div className="flex flex-col gap-2 p-4 bg-primary-green-300">
-                <h2 className="font-bold text-xl text-primary-green-600">{meal.strMeal}</h2>
-                <p className="text-gray-600">{meal.strCategory} · {meal.strArea}</p>
+            <div className="flex flex-1 flex-col justify-between gap-2 p-4 bg-primary-green-300">
+                <div>
+                    <h2 className="font-bold text-xl text-primary-green-600">{meal.strMeal}</h2>
+                    <p className="text-gray-600">{meal.strCategory} · {meal.strArea}</p>
+                </div>
                 <button className="mt-2 bg-primary-green-600 text-white font-bold px-4 py-2 rounded-md hover:opacity-90">
                     View Recipe
                 </button>
