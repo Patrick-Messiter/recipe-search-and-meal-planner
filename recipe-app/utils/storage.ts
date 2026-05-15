@@ -1,11 +1,4 @@
-export interface CartItem {
-  id: string;
-  name: string;
-  thumbnail: string;
-  ingredients: string[];
-  category: string;
-  area: string;
-}
+import { CartItem } from "@/types.cart_item";
 
 export function getCart(): CartItem[] {
   const cart = localStorage.getItem("cart");
