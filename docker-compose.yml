@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: recipe-app
+      dockerfile: ../Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./recipe-app:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
