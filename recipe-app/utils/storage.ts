@@ -3,6 +3,8 @@ export interface CartItem {
   name: string;
   thumbnail: string;
   ingredients: string[];
+  category: string;
+  area: string;
 }
 
 export function getCart(): CartItem[] {
