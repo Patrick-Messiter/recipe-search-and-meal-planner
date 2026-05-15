@@ -43,3 +43,6 @@ next-env.d.ts
 
 # Pycharm
 .idea
+
+# Claude specs added to git-ignore
+/docs
