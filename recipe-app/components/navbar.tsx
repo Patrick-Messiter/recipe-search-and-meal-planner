@@ -1,6 +1,10 @@
 import Link from "next/link"
 
-export default function NavBar() {
+interface NavBarProps {
+    onSurpriseMe: () => void;
+}
+
+export default function NavBar({ onSurpriseMe }: NavBarProps) {
     return (
         <nav className="w-full h-20 flex justify-center bg-primary-green-600">
             <div className="w-3/4 h-full flex justify-between items-center">
@@ -9,8 +13,8 @@ export default function NavBar() {
                 </header>
                 <div className="w-1/4 flex justify-between">
                     <Link className="text-primary-green-400 hover:text-primary-green-200 font-bold" href="/">Search</Link>
-                    <Link className="text-primary-green-400 hover:text-primary-green-200 font-bold" href="/">Shopping List</Link>
-                    <Link className="text-primary-green-400 hover:text-primary-green-200 font-bold" href="/">Surprise Me</Link>
+                    <Link className="text-primary-green-400 hover:text-primary-green-200 font-bold" href="/shopping-list">Shopping List</Link>
+                    <button onClick={onSurpriseMe} className="text-primary-green-400 hover:text-primary-green-200 font-bold" href="/">Surprise Me</button>
                 </div>
             </div>
         </nav>
