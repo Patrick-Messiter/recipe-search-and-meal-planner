@@ -1,4 +1,5 @@
 import { ShoppingListItem, MergedIngredient } from "@/types.shopping_list_item";
+import { standardiseMeasures } from "@/utils/standardise_units";
 
 export function getShoppingList(): ShoppingListItem[] {
     const list = localStorage.getItem("shoppingList");
@@ -34,7 +35,7 @@ export function getMergedShoppingList(): MergedIngredient[] {
         .map(([key, measures]) => ({
             ingredient: key.charAt(0).toUpperCase() + key.slice(1),
             measures,
-            display: measures.join(" + "),
+            display: standardiseMeasures(measures, key),
         }))
         .sort((a, b) => a.ingredient.localeCompare(b.ingredient));
 }

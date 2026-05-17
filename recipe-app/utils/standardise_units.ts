@@ -160,6 +160,11 @@ export function standardiseMeasures(measures: string[], ingredientName = ''): st
     const parsed = measures.map(parseMeasure);
     const density = getSolidDensity(ingredientName);
 
+    function toGrams(p: ParsedMeasure): number {
+        if (p.type === 'weight') return p.valueInBase;
+        return density !== null ? p.valueInBase * density : NaN;
+    }
+
     function resolveVolume(ml: number): string {
         return density !== null ? formatWeight(ml * density) : formatVolume(ml);
     }
@@ -167,10 +172,17 @@ export function standardiseMeasures(measures: string[], ingredientName = ''): st
     const allParsed = parsed.every(Boolean);
     if (allParsed) {
         const types = new Set(parsed.map((p) => p!.type));
+
         if (types.size === 1) {
             const total = parsed.reduce((sum, p) => sum + p!.valueInBase, 0);
             const type = [...types][0];
             return type === 'volume' ? resolveVolume(total) : formatWeight(total);
+        }
+
+        // Mixed volume + weight: sum as grams if we have a density to unify them
+        if (density !== null) {
+            const totalG = parsed.reduce((sum, p) => sum + toGrams(p!), 0);
+            return formatWeight(totalG);
         }
     }
 
