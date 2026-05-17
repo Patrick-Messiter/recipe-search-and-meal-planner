@@ -1,6 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { Meal } from "@/types/meal";
+import { addToShoppingList } from "@/utils/shopping_list_storage";
+import { extractIngredients } from "@/utils/extract_ingredients";
 
 interface RecipeDetailModalProps {
     meal: Meal;
@@ -8,6 +11,18 @@ interface RecipeDetailModalProps {
 }
 
 export default function RecipeDetailModal({ meal, onClose }: RecipeDetailModalProps) {
+    const [added, setAdded] = useState(false);
+
+    const handleAddToShoppingList = () => {
+        const ingredients = extractIngredients(meal);
+        addToShoppingList({
+            mealId: meal.idMeal,
+            mealName: meal.strMeal,
+            ingredients,
+        });
+        setAdded(true);
+    };
+
     return (
         <div
             className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
@@ -77,9 +92,15 @@ export default function RecipeDetailModal({ meal, onClose }: RecipeDetailModalPr
                 </div>
 
                 {/* Add to Trolley */}
-                <button className="w-full bg-primary-green-600 text-white font-bold px-4 py-3 rounded-md hover:opacity-90">
-                    Add to Trolley
-                </button>
+                <div className="flex gap-4">
+                    <button
+                        onClick={handleAddToShoppingList}
+                        disabled={added}
+                        className="flex-1 bg-primary-green-600 text-white font-bold px-4 py-3 rounded-md hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        {added ? "Added to Shopping List ✓" : "Add to My Shopping List"}
+                    </button>
+                </div>
             </div>
         </div>
     );
