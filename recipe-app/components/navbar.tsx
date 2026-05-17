@@ -9,7 +9,7 @@ export default function NavBar() {
                 </header>
                 <div className="w-1/4 flex justify-between">
                     <Link className="text-primary-green-400 hover:text-primary-green-200 font-bold" href="/">Search</Link>
-                    <Link className="text-primary-green-400 hover:text-primary-green-200 font-bold" href="/">Shopping List</Link>
+                    <Link className="text-primary-green-400 hover:text-primary-green-200 font-bold" href="/shopping-list">Shopping List</Link>
                     <Link className="text-primary-green-400 hover:text-primary-green-200 font-bold" href="/">Surprise Me</Link>
                 </div>
             </div>
